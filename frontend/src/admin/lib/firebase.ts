@@ -1,5 +1,5 @@
-import { initializeApp } from 'firebase/app';
-import { browserLocalPersistence, getAuth, setPersistence } from 'firebase/auth';
+import { initializeApp } from "firebase/app";
+import { browserLocalPersistence, getAuth, setPersistence } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -10,7 +10,10 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const hasConfig = Object.values(firebaseConfig).every(Boolean);
 
-setPersistence(auth, browserLocalPersistence).catch(() => undefined);
+export const auth = hasConfig ? getAuth(initializeApp(firebaseConfig)) : null;
+
+if (auth) {
+  setPersistence(auth, browserLocalPersistence).catch(() => undefined);
+}

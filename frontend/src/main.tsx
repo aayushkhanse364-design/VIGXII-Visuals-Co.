@@ -1,17 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Toaster } from 'sonner';
-import App from './App';
-import AdminApp from './admin/App';
-import './index.css';
 
-function isAdminRoute() {
-  return window.location.pathname.startsWith('/admin');
-}
+import { createRoot } from "react-dom/client";
+import { Toaster } from "sonner";
+import App from "./app/App.tsx";
+import "./styles/index.css";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    {isAdminRoute() ? <AdminApp /> : <App />}
+createRoot(document.getElementById("root")!).render(
+  <>
+    <App />
     <Toaster richColors position="top-right" />
-  </React.StrictMode>,
+  </>,
 );
+  
